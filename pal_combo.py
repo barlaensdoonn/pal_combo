@@ -3,6 +3,11 @@
 # 7/31/16
 
 import random
+from Adafruit_MAX9744 import MAX9744
+
+# ## amplings ## #
+volume = 32
+amp = MAX9744()
 
 # ## palindrome variables ## #
 palindrome = ["NE", "VER", "ODD", "OR", "EV", "EN"]
@@ -17,6 +22,10 @@ voices = [x for x in range(1, voices_num + 1)]
 
 # create iteration list of voice_dicts
 iter_list = []
+
+
+def set_gain(volume):
+    amp.set_volume(volume)
 
 
 def shuffleACopy(x):
