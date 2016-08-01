@@ -1,16 +1,22 @@
+#!/usr/bin/python3
+# code for floaters
+# 7/31/16
+
 import random
-# palindrome = ["NE", "VER", "ODD", "OR", "EV", "EN"]
-palindrome = ["BA", "NA", "NA"]
+
+# ## palindrome variables ## #
+palindrome = ["NE", "VER", "ODD", "OR", "EV", "EN"]
+# palindrome = ["BA", "NA", "NA"]
 syllable_dict = dict(enumerate(palindrome))
-
 voices_num = int(input("How many voices will speak each syllable? "))
-
 iter_num = int(input("How many times would you like the palindrome spoken?  "))
-
 syllable_num = len(palindrome)
 
 # changed to list comp for python3
 voices = [x for x in range(1, voices_num + 1)]
+
+# create iteration list of voice_dicts
+iter_list = []
 
 
 def shuffleACopy(x):
@@ -18,8 +24,6 @@ def shuffleACopy(x):
     random.shuffle(b)  # shuffle the copy
     return b  # return the copy
 
-# create iteration list of voice_dicts
-iter_list = []
 
 for i in range(iter_num):
     # make shuffled copies of the voices list for each syllable
