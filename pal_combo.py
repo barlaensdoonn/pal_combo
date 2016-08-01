@@ -25,6 +25,7 @@ iter_list = []
 
 
 def set_gain(volume):
+    print('setting volume to {}...'.format(volume))
     amp.set_volume(volume)
 
 
