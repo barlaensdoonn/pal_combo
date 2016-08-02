@@ -3,25 +3,41 @@
 # 7/31/16
 
 import random
+import subprocess
+import sys
 from Adafruit_MAX9744 import MAX9744
+
+
+# ## hosts ## #
+host = "pi@192.168.1.11"
+
 
 # ## amplings ## #
 volume = 32
+mute = 0
 amp = MAX9744()
+mute_remote = "python3 ~/floaters/scripts/mute_amp.py"
+set_gain = "python3 ~/floaters/scripts/set_gain.py"
+
 
 # ## palindrome variables ## #
 palindrome = ["NE", "VER", "ODD", "OR", "EV", "EN"]
-# palindrome = ["BA", "NA", "NA"]
 syllable_dict = dict(enumerate(palindrome))
 voices_num = int(input("How many voices will speak each syllable? "))
 iter_num = int(input("How many times would you like the palindrome spoken?  "))
 syllable_num = len(palindrome)
-
-# changed to list comp for python3
 voices = [x for x in range(1, voices_num + 1)]
 
 # create iteration list of voice_dicts
 iter_list = []
+
+
+def mute_remote(host):
+    ssh = subprocess.Popen(["ssh", "{}".format(host), mute_remote], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+def set_gain_remote(host):
+    ssh = subprocess.Popen(["ssh", "{}".format(host), set_gain], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 def set_gain(volume):
