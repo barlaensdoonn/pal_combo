@@ -3,3 +3,29 @@
 2. For each syllable in the palindrome, we want x different voices to pronounce it
 3. We will loop through the sets of syllables, always starting with the first (NE) and ending with the last (EN), and randomly choose a voice from the set of x voices, without repeating a voice until all options have been exhausted
 4. We will repeat this process y times
+
+
+## components
+each component below represents its own module
+server and clients are raspberry pis
+
+
+#### combinatorics
+iterate pairwise through 2 sets of variables without repeating combinations, explained above
+
+
+#### server-client communication via sockets
+use UDP sockets to broadcast messages to listening clients
+* each client controls 2 channels of audio
+* each channel of audio corresponds to a specific voice
+* a single server will run the combinatorics code and broadcast a message across the local network signifying the current combination
+* audio will be triggered on listening clients if the message corresponds to their voice
+
+
+#### use pygame and stereo panning to play specific audio file
+trigger playback of audio file based on received command
+* command - file correlated via dictionary
+* utilize stereo panning to isolate client's audio channels
+
+#### control amp hardware via I2C
+interface via client's GPIO with Adafruit's [MAX9744 amplifier](https://learn.adafruit.com/adafruit-20w-stereo-audio-amplifier-class-d-max9744/overview) using their supplied library
