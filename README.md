@@ -19,7 +19,7 @@ use UDP sockets to broadcast messages to listening clients
 * each client controls 2 channels of audio
 * each channel of audio corresponds to a specific voice
 * a single server will run the combinatorics code and broadcast a message across the local network signifying the current combination
-* audio will be triggered on listening clients if the message corresponds to their voice
+* audio will be triggered on listening client if the message corresponds to its voice
 
 
 #### *use pygame and stereo panning to play specific audio file*
