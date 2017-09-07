@@ -17,10 +17,10 @@ sound.set_volume(0.4)  # lower sound's overall volume
 channel = sound.play(loops=-1)  # loop indefinitely
 
 channel.set_volume(1, 0)  # pan to the left
-time.delay(1)
+time.delay(1000)
 channel.set_volume(0, 1)  # pan to the right
-time.delay(1)
+time.delay(1000)
 channel.set_volume(1, 1)  # full stereo
-time.delay(1)
+time.delay(1000)
 
 channel.stop()  # stop the indefinite loop
