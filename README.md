@@ -10,11 +10,11 @@ each component below represents its own module
 server and clients are raspberry pis
 
 
-#### combinatorics
+#### *combinatorics*
 iterate pairwise through 2 sets of variables without repeating combinations, explained above
 
 
-#### server-client communication via sockets
+#### *server-client communication via sockets*
 use UDP sockets to broadcast messages to listening clients
 * each client controls 2 channels of audio
 * each channel of audio corresponds to a specific voice
@@ -22,10 +22,10 @@ use UDP sockets to broadcast messages to listening clients
 * audio will be triggered on listening clients if the message corresponds to their voice
 
 
-#### use pygame and stereo panning to play specific audio file
+#### *use pygame and stereo panning to play specific audio file*
 trigger playback of audio file based on received command
 * command - file correlated via dictionary
 * utilize stereo panning to isolate client's audio channels
 
-#### control amp hardware via I2C
+#### *control amp hardware via I2C*
 interface via client's GPIO with Adafruit's [MAX9744 amplifier](https://learn.adafruit.com/adafruit-20w-stereo-audio-amplifier-class-d-max9744/overview) using their supplied library
