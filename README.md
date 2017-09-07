@@ -50,7 +50,7 @@ sudo pip3 install pygame
 ```
 reference: https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=33157&p=332140&hilit=croston%2bpygame#p284266
 
-- or - (untested)
+\- or - (untested)
 
 ```
 sudo apt-get install python3-pygame
