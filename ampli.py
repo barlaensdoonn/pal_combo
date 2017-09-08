@@ -43,10 +43,10 @@ class Ampli(object):
 
         print('received request to set volume to {}'.format(value))
         value = self._constrain(value)
-        self.volume = value
 
         print('setting volume to {}...'.format(value))
         self.amp.set_volume(value)
+        self.volume = value
 
     def decrease_volume(self):
         print('decreasing volume by one step')
