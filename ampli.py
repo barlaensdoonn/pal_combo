@@ -28,18 +28,19 @@ from Adafruit_MAX9744 import MAX9744
 class Ampli(object):
     '''wrapper for adafruit's MAX9744 class'''
 
-    def __init__(self, initial_volume=16):
+    def __init__(self, volume=16):
         self.mute = 0
         self.max = 63
-        self.initial_volume = initial_volume
+        self.volume = volume
         self.amp = MAX9744()
-        self.amp.set_volume(self.initial_volume)
+        self.amp.set_volume(self.volume)
 
     def set_volume(self, volume):
         '''value should be between 0-63 inclusive'''
 
         volume = self.max if volume > self.max else volume
         volume = self.mute if volume < self.mute else volume
+        self.volume = volume
 
         print('Setting volume to {}...'.format(volume))
         self.amp.set_volume(volume)
