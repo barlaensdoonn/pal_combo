@@ -63,23 +63,23 @@ class Ampli(object):
         direction = None
         target = self._constrain(value)
 
-        if value == self.volume:
-            print('volume already set to {}'.format(value))
+        if target == self.volume:
+            print('volume already set to {}'.format(target))
             return
-        else:
-
-        volume = self.volume
-        interval = self.max - volume
-
-        if not interval:
-            print('already at max volume')
-            return
+        elif target > self.volume:
+            direction = 1
+            interval = target - self.volume
+        elif target < self.volume:
+            direction = -1
+            interval = self.volume - target
 
         try:
+            print('ramping volume from {} to {} in 1 second increments'.format(self.volume, target))
+            step = self.volume
             for i in range(interval):
-                volume += 1
-                self.set_volume(volume)
+                step += direction
+                self.set_volume(step)
                 time.sleep(1)
         except KeyboardInterrupt:
-            print('user interrupt received')
+            print('\nuser interrupt received')
             print('leaving volume set to {}'.format(self.volume))
