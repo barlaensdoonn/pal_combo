@@ -35,15 +35,18 @@ class Ampli(object):
         self.amp = MAX9744()
         self.amp.set_volume(self.volume)
 
-    def set_volume(self, volume):
+    def _constrain(self, value):
+        return self.mute if value < self.mute else self.max if value > self.max else value
+
+    def set_volume(self, value):
         '''value should be between 0-63 inclusive'''
 
-        print('received request to set volume to {}'.format(volume))
-        volume = self.mute if volume < self.mute else self.max if volume > self.max else volume
-        self.volume = volume
+        print('received request to set volume to {}'.format(value))
+        value = self._constrain(value)
+        self.volume = value
 
-        print('setting volume to {}...'.format(volume))
-        self.amp.set_volume(volume)
+        print('setting volume to {}...'.format(value))
+        self.amp.set_volume(value)
 
     def decrease_volume(self):
         print('decreasing volume by one step')
