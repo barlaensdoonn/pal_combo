@@ -21,7 +21,7 @@
 # amp = MAX9744(busnum=2, address=0x4C)
 # ## END NOTES ## #
 
-
+import time
 from Adafruit_MAX9744 import MAX9744
 
 
@@ -38,10 +38,11 @@ class Ampli(object):
     def set_volume(self, volume):
         '''value should be between 0-63 inclusive'''
 
+        print('received request to set volume to {}'.format(volume))
         volume = self.mute if volume < self.mute else self.max if volume > self.max else volume
         self.volume = volume
 
-        print('Setting volume to {}...'.format(volume))
+        print('setting volume to {}...'.format(volume))
         self.amp.set_volume(volume)
 
     def decrease_volume(self):
@@ -53,3 +54,18 @@ class Ampli(object):
         self.amp.increase_volume()
 
     def ramp_up(self):
+        volume = self.volume
+        interval = self.max - volume
+
+        if not interval:
+            print('already at max volume')
+            return
+
+        try:
+            for i in range(interval):
+                volume += 1
+                self.set_volume(volume)
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print('user interrupt received')
+            print('leaving volume set to {}'.format(self.volume))
