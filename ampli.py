@@ -36,12 +36,15 @@ class Ampli(object):
         self.amp.set_volume(self.volume)
 
     def _constrain(self, value):
-        return self.mute if value < self.mute else self.max if value > self.max else value
+        cnstrnd = self.mute if value < self.mute else self.max if value > self.max else value
+
+        if cnstrnd != value:
+            print('constrained received value of {} to {}'.format(value, cnstrnd))
+
+        return cnstrnd
 
     def set_volume(self, value):
         '''value should be between 0-63 inclusive'''
-
-        print('received request to set volume to {}'.format(value))
         value = self._constrain(value)
 
         print('setting volume to {}...'.format(value))
@@ -56,7 +59,15 @@ class Ampli(object):
         print('increasing volume by one step')
         self.amp.increase_volume()
 
-    def ramp_up(self):
+    def ramp_to(self, value):
+        direction = None
+        target = self._constrain(value)
+
+        if value == self.volume:
+            print('volume already set to {}'.format(value))
+            return
+        else:
+
         volume = self.volume
         interval = self.max - volume
 
