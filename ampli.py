@@ -38,8 +38,7 @@ class Ampli(object):
     def set_volume(self, volume):
         '''value should be between 0-63 inclusive'''
 
-        volume = self.max if volume > self.max else volume
-        volume = self.mute if volume < self.mute else volume
+        volume = self.mute if volume < self.mute else self.max if volume > self.max else volume
         self.volume = volume
 
         print('Setting volume to {}...'.format(volume))
@@ -52,3 +51,5 @@ class Ampli(object):
     def increase_volume(self):
         print('increasing volume by one step')
         self.amp.increase_volume()
+
+    def ramp_up(self):
