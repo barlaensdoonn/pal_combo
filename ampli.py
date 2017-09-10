@@ -20,7 +20,7 @@ class Ampli(object):
         self.min = 0
         self.max = 63
         self.volume = volume
-        self.unmute = self.volume
+        self.unmute_volume = self.volume
         self.amp = MAX9744()
         self.set_volume(self.volume)
 
@@ -56,12 +56,12 @@ class Ampli(object):
 
     def mute(self):
         print('muting amp')
-        self.unmute = self.volume
+        self.unmute_volume = self.volume
         self.set_volume(self.min, suppress=True)
 
     def unmute(self):
         print('unmuting amp')
-        self.set_volume(self.unmute, suppress=True)
+        self.set_volume(self.unmute_volume, suppress=True)
 
     def ramp_to(self, value):
         '''
