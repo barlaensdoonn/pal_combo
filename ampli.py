@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# MAX9744 utility methods
+# MAX9744 library wrapper
 # 9/7/17
 # updated: 9/9/17
 
@@ -11,8 +11,8 @@ class Ampli(object):
     '''
     wrapper for adafruit's MAX9744 library, which has following methods:
     set_volume(), increase_volume(), decrease_volume()
-    also if controlling more than one amp from a single pi,
-    must change the i2c address on the amp itself and pass in new address to MAX9744()
+    if controlling more than one amp from a single pi, must change
+    the i2c address on the amp itself and pass in new address to MAX9744()
     more here: https://github.com/adafruit/Adafruit_Python_MAX9744
     '''
 
@@ -45,12 +45,14 @@ class Ampli(object):
         self.volume = value
 
     def decrease_volume(self):
-        print('decreasing volume by one step')
         self.amp.decrease_volume()
+        self.volume -= 1
+        print('decreased volume by one step to {}'.format(self.volume))
 
     def increase_volume(self):
-        print('increasing volume by one step to {}'.format())
         self.amp.increase_volume()
+        self.volume += 1
+        print('increased volume by one step to {}'.format(self.volume))
 
     def mute(self):
         print('muting amp')
