@@ -17,7 +17,7 @@ class Ampli(object):
     '''
 
     def __init__(self, volume=16):
-        self.mute = 0
+        self.min = 0
         self.max = 63
         self.volume = volume
         self.unmute = self.volume
@@ -26,7 +26,7 @@ class Ampli(object):
 
     def _constrain(self, value):
         '''valid values are 0-63 inclusive'''
-        cnstrnd = self.mute if value < self.mute else self.max if value > self.max else value
+        cnstrnd = self.min if value < self.min else self.max if value > self.max else value
 
         if cnstrnd != value:
             print('received value of {} outside valid range of 0-63'.format(value))
@@ -57,12 +57,11 @@ class Ampli(object):
     def mute(self):
         print('muting amp')
         self.unmute = self.volume
-        self.set_volume(0, suppress=True)
+        self.set_volume(self.min, suppress=True)
 
     def unmute(self):
         print('unmuting amp')
-        volume = self.unmute
-        self.set_volume(volume, suppress=True)
+        self.set_volume(self.unmute, suppress=True)
 
     def ramp_to(self, value):
         '''
