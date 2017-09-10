@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # MAX9744 utility methods
 # 9/7/17
-# updated: 9/7/17
+# updated: 9/9/17
 
 # ## NOTES ## #
 # must install Adafruit's MAX9744 python library
@@ -26,25 +26,27 @@ from Adafruit_MAX9744 import MAX9744
 
 
 class Ampli(object):
-    '''wrapper for adafruit's MAX9744 class'''
+    '''wrapper for adafruit's MAX9744 library'''
 
     def __init__(self, volume=16):
         self.mute = 0
         self.max = 63
         self.volume = volume
         self.amp = MAX9744()
-        self.amp.set_volume(self.volume)
+        self.set_volume(self.volume)
 
     def _constrain(self, value):
+        '''valid values are 0-63 inclusive'''
         cnstrnd = self.mute if value < self.mute else self.max if value > self.max else value
 
         if cnstrnd != value:
-            print('constrained received value of {} to {}'.format(value, cnstrnd))
+            print('received value of {} outside valid range of 0-63'.format(value))
+            print('constraining to {}'.format(cnstrnd))
 
         return cnstrnd
 
     def set_volume(self, value):
-        '''value should be between 0-63 inclusive'''
+        '''valid values are 0-63 inclusive'''
         value = self._constrain(value)
 
         print('setting volume to {}...'.format(value))
@@ -59,7 +61,14 @@ class Ampli(object):
         print('increasing volume by one step')
         self.amp.increase_volume()
 
+    def mute(self):
+        self.set_volume(self.mute)
+
     def ramp_to(self, value):
+        '''
+        ramp from current volume to imput value by one step in one second increments.
+        use Ctrl-C to interrupt the process and leave volume set to the current step
+        '''
         direction = None
         target = self._constrain(value)
 
