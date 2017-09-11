@@ -63,7 +63,7 @@ class Panner(object):
                 channel.set_volume(*self.pan_right)
 
             channel.play(self.sounds[i])
-            self.wait(channel)
+            self._wait(channel)
             # pytime.wait(self.waits[i])
             # channel.stop()
             print(clock.get_time())
