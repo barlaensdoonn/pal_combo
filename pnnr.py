@@ -32,9 +32,9 @@ class Panner(object):
 
     def _wait(self, channel):
         '''
-        pause until channel is done playing sound. using this technique results
-        in noticeable gaps between the end of one sound and start of next.
-        calculate_waits technique takes this into account
+        pause until channel is done playing sound.
+        using this technique results in noticeable gaps between the end of one sound and start of next.
+        calculate_waits technique takes this into account, use that instead.
         '''
         while channel.get_busy():
             pass
@@ -63,6 +63,7 @@ class Panner(object):
                 channel.set_volume(*self.pan_right)
 
             channel.play(self.sounds[i])
-            pytime.wait(self.waits[i])
+            self.wait(channel)
+            # pytime.wait(self.waits[i])
             # channel.stop()
             print(clock.get_time())
