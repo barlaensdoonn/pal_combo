@@ -28,13 +28,14 @@ class Panner(object):
             for thing in filenames:
                 filepaths.append(os.path.join(dirpath, thing))
 
+        filepaths.sort()
         self.sounds = [self.mixer.Sound(filepath) for filepath in filepaths]
 
     def _wait(self, channel):
         '''
         pause until channel is done playing sound.
         using this technique results in noticeable gaps between the end of one sound and start of next.
-        calculate_waits technique takes this into account, use that instead.
+        calculate_waits technique tries to deal with this
         '''
         while channel.get_busy():
             pass
@@ -63,7 +64,7 @@ class Panner(object):
                 channel.set_volume(*self.pan_right)
 
             channel.play(self.sounds[i])
-            self._wait(channel)
-            # pytime.wait(self.waits[i])
+            pytime.wait(self.waits[i])
+            # self._wait(channel)
             # channel.stop()
             print(clock.get_time())
