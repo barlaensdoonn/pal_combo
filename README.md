@@ -35,8 +35,7 @@ interface via client's GPIO with Adafruit's [MAX9744 amplifier](https://learn.ad
 
 #### *MAX9744 amp library and dependencies*
 ```
-~~sudo apt-get install python-smbus~~
-~~sudo apt-get install python3-smbus~~
+sudo apt-get install python3-smbus
 git clone https://github.com/adafruit/Adafruit_Python_MAX9744.git
 cd Adafruit_Python_MAX9744
 sudo python3 setup.py install
