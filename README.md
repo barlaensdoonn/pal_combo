@@ -28,19 +28,10 @@ trigger playback of audio file based on received command
 * utilize stereo panning to isolate client's audio channels
 
 #### *control amp hardware via I2C*
-interface via client's GPIO with Adafruit's [MAX9744 amplifier](https://learn.adafruit.com/adafruit-20w-stereo-audio-amplifier-class-d-max9744/overview) using their supplied library
+interface via client's GPIO with Adafruit's [MAX9744 amplifier](https://learn.adafruit.com/adafruit-20w-stereo-audio-amplifier-class-d-max9744/overview) using a [wrapper](https://github.com/barlaensdoonn/ampli) around their supplied library
 
 
 ## install notes
-
-#### *MAX9744 amp library and dependencies*
-```
-sudo apt-get install python3-smbus
-git clone https://github.com/adafruit/Adafruit_Python_MAX9744.git
-cd Adafruit_Python_MAX9744
-sudo python3 setup.py install
-```
-enable I2C in raspi-config
 
 #### *pygame and dependencies*
 ```
